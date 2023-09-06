@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 22:00:14 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/06 10:36:28 by dphang           ###   ########.fr       */
+/*   Created: 2023/09/06 11:35:05 by dphang            #+#    #+#             */
+/*   Updated: 2023/09/06 11:40:12 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft.c"
 
-int	ft_strlen(char *str)
+int	main(int ac, char **av)
 {
-	int	i;
+	int	n;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	n = ft_atoi(av[3])
+	if (ac > 1)
+	{
+		printf("%s\n", av[1]);
+		ft_memset(av[1], av[2], n);
+		printf("%s\n", av[1]);
+	}
+	return (0);
 }
