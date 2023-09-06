@@ -6,13 +6,13 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:02:37 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/06 11:04:19 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/06 13:05:50 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c >= ' ' && c <= '~')
 		return (1);
