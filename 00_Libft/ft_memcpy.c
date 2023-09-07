@@ -6,15 +6,15 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 14:56:16 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/09 15:17:23 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/08 00:58:24 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int		i;
+	size_t	i;
 	char	*d;
 	char	*s;
 
@@ -24,6 +24,7 @@ void	*memcpy(void *dest, const void *src, size_t n)
 	while (src[i])
 	{
 		dest[i] = src[i];
+		i++;
 	}
 	return (dest);
 }
