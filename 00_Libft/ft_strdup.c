@@ -6,13 +6,13 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 16:21:42 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/07 17:02:39 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/07 21:49:47 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
 	int		i;
 	int		len;
