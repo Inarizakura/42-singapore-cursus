@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:35:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/07 23:11:32 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/09 11:38:40 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	main(int ac, char **av)
 int	main(int ac, char **av)
 {
 	int	n = atoi(av[3]);
-//	char	*s;
+	char	*s;
 
 	if (ac == 4)
 	{
 		printf("%s\n", av[1]);
-		ft_strnstr(av[1], av[2], n);
-		//printf("%s\n", s);
+		s = ft_strnstr(av[1], av[2], n);
+		printf("%s\n", s);
 	}
 	return (0);
 }

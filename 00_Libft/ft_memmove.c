@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:09:57 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/06 15:16:31 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/09 15:17:04 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	*memmove(void *dest, const void *src, size_t n)
 {
-	
 	return (dest);
 }
