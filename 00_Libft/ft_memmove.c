@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:09:57 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/08 06:53:27 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/12 21:50:32 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	i = 0;
 	d = (char *)dest;
 	s = (char *)src;
-	if (&dest[i] < &src[i])
+	if (d[i] < s[i])
 	{
 		while (i < n)
 		{
