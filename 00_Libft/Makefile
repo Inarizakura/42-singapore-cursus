@@ -6,7 +6,7 @@
 #    By: dphang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 11:30:51 by dphang            #+#    #+#              #
-#    Updated: 2023/09/12 21:57:10 by dphang           ###   ########.fr        #
+#    Updated: 2023/09/14 16:50:15 by dphang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS = \
 	ft_strncmp.c \
 	ft_strnstr.c \
 	ft_strrchr.c \
+	ft_substr.c \
 	ft_tolower.c \
 	ft_toupper.c
 OBJS = $(SRCS:.c=.o)
