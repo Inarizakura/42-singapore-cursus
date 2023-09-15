@@ -6,7 +6,7 @@
 #    By: dphang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 11:30:51 by dphang            #+#    #+#              #
-#    Updated: 2023/09/14 16:50:15 by dphang           ###   ########.fr        #
+#    Updated: 2023/09/15 15:39:06 by dphang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ SRCS = \
 	ft_memset.c \
 	ft_strchr.c \
 	ft_strdup.c \
+	ft_strjoin.c \
 	ft_strlcat.c \
 	ft_strlcpy.c \
 	ft_strlen.c \
 	ft_strncmp.c \
 	ft_strnstr.c \
 	ft_strrchr.c \
+	ft_strtrim.c \
 	ft_substr.c \
 	ft_tolower.c \
 	ft_toupper.c
