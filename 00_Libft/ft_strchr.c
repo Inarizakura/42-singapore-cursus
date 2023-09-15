@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:18:00 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/06 17:43:09 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/15 12:14:02 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;
+	char	ch;
 
 	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
-		s++;
-	}
-	if (c == '\0')
+	ch = (char)c;
+	while (s[i] && s[i] != ch)
+		i++;
+	if (s[i] == ch)
 		return ((char *)&s[i]);
 	return (((void *)0));
 }

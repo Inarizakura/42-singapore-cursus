@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 03:23:19 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/08 04:37:11 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/15 16:50:33 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (((void *)0));
 }
-
-/*#include <stdio.h>
-
-int	main(void)
-{
-	char str[50] = "hello";
-	char *res;
-	int	c = 'l';
-
-	printf("%s\n", str);
-	res = (char *)memchr(str, c, 4);
-	printf("%s\n", res);
-	return (0);
-}*/
