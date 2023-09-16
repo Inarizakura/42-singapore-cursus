@@ -1,38 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 16:40:15 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/16 14:50:03 by dphang           ###   ########.fr       */
+/*   Created: 2023/09/16 17:09:55 by dphang            #+#    #+#             */
+/*   Updated: 2023/09/16 19:36:44 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	digit_count(long int num)
 {
-	unsigned int	s_len;
-	size_t			i;
-	char			*str;
-
-	i = 0;
-	s_len = ft_strlen(s);
-	if (start > s_len)
-		return (ft_strdup(""));
-	if ((start + len) > s_len)
-		str = (char *)malloc((s_len - start + 1) * sizeof(char));
+	if (num / 10 != 0)
+		return (1 + digit_count(num / 10));
+	if (num < 0)
+		return (2);
 	else
-		str = (char *)malloc((len + 1) * sizeof(char));
+		return (1);
+}
+
+char	*ft_itoa(int n)
+{
+	int			i;
+	int			d;
+	long int	num;
+	char		*str;
+
+	num = n;
+	d = digit_count(num);
+	str = (char *)malloc((d + 1) * sizeof(char));
 	if (!str)
-		return (((void *)0));
-	while (s[start + i] && start < s_len && i < len)
+		return (NULL);
+	if (num < 0)
 	{
-		str[i] = s[start + i];
-		i++;
+		str[0] = '-';
+		num *= -1;
 	}
-	str[i] = '\0';
+	i = (d - 1);
+	while (i >= 0 && str[i] != '-')
+	{
+		str[i] = (num % 10) + 48;
+		num /= 10;
+		i--;
+	}
+	str[d] = '\0';
 	return (str);
 }
