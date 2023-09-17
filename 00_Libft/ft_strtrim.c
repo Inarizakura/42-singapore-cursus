@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 14:12:04 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/15 18:12:29 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/17 17:59:21 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	end = ft_strlen(s1) - 1;
 	while (start < end && ft_strchr(set, s1[end]))
 		end--;
-	str = ft_substr(s1, start, (end - start + 1)); 
+	str = ft_substr(s1, start, (end - start + 1));
 	return (str);
 }
