@@ -6,7 +6,7 @@
 #    By: dphang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 11:30:51 by dphang            #+#    #+#              #
-#    Updated: 2023/09/16 17:12:19 by dphang           ###   ########.fr        #
+#    Updated: 2023/09/18 16:32:43 by dphang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS = \
 	ft_isascii.c \
 	ft_isdigit.c \
 	ft_isprint.c \
+	ft_lstnew.c \
 	ft_memchr.c \
 	ft_memcmp.c \
 	ft_memcpy.c \
@@ -48,18 +49,31 @@ SRCS = \
 	ft_substr.c \
 	ft_tolower.c \
 	ft_toupper.c
+BSRCS = \
+	ft_lstadd_back.c \
+	ft_lstadd_front.c \
+	ft_lstlast.c \
+	ft_lstnew.c \
+	ft_lstsize.c
 OBJS = $(SRCS:.c=.o)
+BOBJS = $(BSRCS:.c=.o)
+RM = rm -f
+
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
+bonus: $(OBJS) $(BOBJS)
+	ar rc $(NAME) $(BOBJS) $(OBJS)
+
+
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS) $(BOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

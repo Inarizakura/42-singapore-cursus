@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:07:06 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/18 14:21:21 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/18 14:43:03 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	ft_charcount(char const *s, int i, char c)
 	return (count);
 }
 
-static void	ft_free(char **s, size_t i)
+static char	**ft_free(char **s, size_t i)
 {
 	while (i > 0)
 	{
@@ -56,6 +56,7 @@ static void	ft_free(char **s, size_t i)
 		i--;
 	}
 	free(s);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
@@ -77,7 +78,7 @@ char	**ft_split(char const *s, char c)
 		{
 			str[j] = ft_substr(s, i, (ft_charcount(s, i, c)));
 			if (!str[j])
-				ft_free(str, (j + 1));
+				return (ft_free(str, (j + 1)));
 			is_word = 1;
 			j++;
 		}
