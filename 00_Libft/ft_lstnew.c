@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 14:50:35 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/18 14:58:26 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/18 18:44:46 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	node->content = content;
 	node->next = NULL;
-
 	return (node);
 }

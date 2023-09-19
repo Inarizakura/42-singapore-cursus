@@ -6,7 +6,7 @@
 #    By: dphang <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/09 11:30:51 by dphang            #+#    #+#              #
-#    Updated: 2023/09/18 16:32:43 by dphang           ###   ########.fr        #
+#    Updated: 2023/09/18 20:38:16 by dphang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,11 @@ SRCS = \
 BSRCS = \
 	ft_lstadd_back.c \
 	ft_lstadd_front.c \
+	ft_lstclear.c \
+	ft_lstdelone.c \
+	ft_lstiter.c \
 	ft_lstlast.c \
+	ft_lstmap.c \
 	ft_lstnew.c \
 	ft_lstsize.c
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 11:09:39 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/18 16:32:56 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/18 20:42:21 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 }					t_list;
 
 t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
@@ -39,10 +40,9 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-//void	ft_lstclear(t_list **lst, void (*del)(void *));
-//void	ft_lstdelone(t_list *lst, void (*del)(void *));
-//void	ft_lstiter(t_list *lst, void (*f)(void *));
-//void	ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
