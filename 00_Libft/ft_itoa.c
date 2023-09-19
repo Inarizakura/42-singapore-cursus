@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	digit_count(long int num)
+static int	digit_count(long int num)
 {
 	if (num / 10 != 0)
 		return (1 + digit_count(num / 10));
