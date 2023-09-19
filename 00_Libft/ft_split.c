@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:07:06 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/19 18:07:55 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/19 19:21:29 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,18 @@ char	**ft_split(char const *s, char c)
 	str = (char **)malloc((words + 1) * sizeof(char *));
 	if (!s || !str)
 		return (NULL);
-	while (i < words)
+
+	while (j < words)
 	{
 		while (s[i] == c)
 			i++;
-		str[j] = ft_substr(s, i, ft_charcount(s, i, c));
+		if (s[i])
+			str[j] = ft_substr(s, i, ft_charcount(s, i, c));
 		if (!str[j])
 			return (ft_free(str, j));
 		j++;
 		i += ft_charcount(s, i, c);
 	}
-	str[j] = '\0';
+	str[j] = NULL;
 	return (str);
 }

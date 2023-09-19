@@ -69,9 +69,11 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
-bonus: $(OBJS) $(BOBJS)
-	ar rc $(NAME) $(BOBJS) $(OBJS)
+bonus: $(BOBJS)
+	ar rc $(NAME) $(BOBJS)
 
+%o: %c
+	${CC} ${CFLAGS} -c -o $@ $<
 
 clean:
 	$(RM) $(OBJS) $(BOBJS)
@@ -81,4 +83,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
