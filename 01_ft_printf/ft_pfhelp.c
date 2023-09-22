@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_pfhelp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/20 13:08:48 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/22 15:57:32 by dphang           ###   ########.fr       */
+/*   Created: 2023/09/22 14:53:35 by dphang            #+#    #+#             */
+/*   Updated: 2023/09/22 15:58:09 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-#include <stdarg.h>
-#include <unistd.h>
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
 
-int	ft_printf(const char *str, ...);
-int	ft_putchar(char c);
-int ft_putstr(char *s);
+int	ft_putstr(char *s)
+{
+	int i;
 
-#endif
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
