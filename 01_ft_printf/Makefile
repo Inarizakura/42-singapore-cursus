@@ -6,7 +6,7 @@
 #    By: dphang <dphang@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 14:51:03 by dphang            #+#    #+#              #
-#    Updated: 2023/09/20 18:00:12 by dphang           ###   ########.fr        #
+#    Updated: 2023/09/23 14:33:35 by dphang           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = libftprintf.a
 CC = cc 
 CFLAGS = -Wall -Wextra -Werror
 SRCS = \
-	ft_printf.c
+	ft_printf.c \
+	ft_pfhelp.c
 OBJS = $(SRCS:.c=.o)
 AR = ar rc
 RM = rm -f
