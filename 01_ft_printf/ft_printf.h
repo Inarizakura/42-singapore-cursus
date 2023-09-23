@@ -6,7 +6,7 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 13:08:48 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/22 15:57:32 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/23 18:48:18 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 int	ft_printf(const char *str, ...);
 int	ft_putchar(char c);
 int ft_putstr(char *s);
+int	ft_putnbrbase(int nbr, int count);
 
 #endif
