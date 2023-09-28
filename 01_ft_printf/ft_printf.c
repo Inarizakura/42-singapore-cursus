@@ -6,33 +6,45 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:04:18 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/23 18:47:56 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/28 16:45:14 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_checkformat(va_list args, char format)
+static void ft_tounsigned(int nbr, char *base, int *count)
+{
+	long long int	nb;
+
+	nb = nbr;
+	if (nb < 0)
+	{
+		ft_putchar('-', count);
+		nb *= -1;
+	}
+	ft_putullnbr_base(nb, base, count);
+}
+
+static void	ft_checkformat(va_list args, char format, int *count)
 {
 	if (format == 'c')
-		return (ft_putchar(va_arg(args, int)));
+		ft_putchar(va_arg(args, unsigned int), count);
 	if (format == 's')
-		return (ft_putstr(va_arg(args, char *)));
+		ft_putstr(va_arg(args, char *), count);
 	if (format == 'p')
-		return (0);
+		ft_putptr(va_arg(args, void *), count);
 	if (format == 'd')
-		return (ft_putnbrbase(va_arg(args, int), 0));
+		ft_tounsigned(va_arg(args, int), "0123456789", count);
 	if (format == 'i')
-		return (0);
+		ft_tounsigned(va_arg(args, int), "0123456789", count);
 	if (format == 'u')
-		return (0);
+		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789", count);
 	if (format == 'x')
-		return (0);
+		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789abcdef", count);
 	if (format == 'X')
-		return (0);
+		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", count);
 	if (format == '%')
-		return (ft_putchar('%'));
-	return (0);
+		ft_putchar('%', count);
 }
 
 int	ft_printf(const char *str, ...)
@@ -46,23 +58,15 @@ int	ft_printf(const char *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%' && str[i - 1] != '%')
-			count += ft_checkformat(args, str[i + 1]);
-		else if (str[i - 1] != '%' && str[i])
-			count += ft_putchar(str[i]);
+		if (str[i] == '%')
+		{
+			ft_checkformat(args, str[i + 1], &count);
+			i++;
+		}
+		else
+			ft_putchar(str[i], &count);
 		i++;
 	}
 	va_end(args);
 	return (count);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	char	c = 'D';
-
-	printf("%d\n", printf("printf %%c results: %c.\n", c));
-	//ft_printf("%d\n", ft_printf("ft_printf %%c results: %c.\n", c));
-	ft_printf("%d\n", ft_printf("ft_printf %%c results: %c.\n", c));
-	return (0);
-}*/
