@@ -6,45 +6,64 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 14:53:35 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/23 18:53:32 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/28 14:28:19 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
+void	ft_putchar(char c, int *count)
 {
-	return (write(1, &c, 1));
+	*count += write(1, &c, 1);
 }
 
-int	ft_putstr(char *s)
+void	ft_putstr(char *s, int *count)
 {
 	int i;
 
 	i = 0;
 	if (!s)
-		return (0);
+	{
+		ft_putstr("(null)", count);
+		return ;
+	}
 	while (s[i])
-		i += write(1, &s[i], 1);
+	{
+		ft_putchar(s[i], count);
+		i++;
+	}
+}
+
+void	ft_putptr(void *ptr, int *count)
+{
+	ft_putstr("0x", count);
+	ft_putullnbr_base((unsigned long long int)ptr, "0123456789abcdef", count);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		i++;
+	}
 	return (i);
 }
 
-int	ft_putnbrbase(int nbr)
+void	ft_putullnbr_base(unsigned long long int nbr, char *base, int *count)
 {
-	int			count;
-	long int	nb;
-
-	count = 0;
-	nb = nbr;
-	if (nbr < 0)
+	if (ft_strlen(base) == 10)
 	{
-		ft_putchar('-');
-		nbr *= -1;
-		count++;
+		if (nbr > 9)
+			ft_putullnbr_base((nbr / 10), base, count);
+		ft_putchar(base[nbr % 10], count);
 	}
-	if (nbr > 9)
-		ft_putnbrbase(nbr / 10);
-	if (nbr >= 0)
-		count += ft_putchar((nbr % 10) + '0');
-	return (count);
+	else if (ft_strlen(base) == 16)
+	{
+		if (nbr > 15)
+			ft_putullnbr_base((nbr /16), base, count);
+		ft_putchar(base[nbr % 16], count);
+	}
 }
