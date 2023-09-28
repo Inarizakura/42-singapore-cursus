@@ -6,13 +6,13 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:04:18 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/28 16:45:14 by dphang           ###   ########.fr       */
+/*   Updated: 2023/09/28 22:21:48 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void ft_tounsigned(int nbr, char *base, int *count)
+static void	ft_tounsigned(int nbr, char *base, int *count)
 {
 	long long int	nb;
 
@@ -22,7 +22,7 @@ static void ft_tounsigned(int nbr, char *base, int *count)
 		ft_putchar('-', count);
 		nb *= -1;
 	}
-	ft_putullnbr_base(nb, base, count);
+	ft_putullnbr(nb, base, count);
 }
 
 static void	ft_checkformat(va_list args, char format, int *count)
@@ -38,11 +38,11 @@ static void	ft_checkformat(va_list args, char format, int *count)
 	if (format == 'i')
 		ft_tounsigned(va_arg(args, int), "0123456789", count);
 	if (format == 'u')
-		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789", count);
+		ft_putullnbr(va_arg(args, unsigned int), "0123456789", count);
 	if (format == 'x')
-		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789abcdef", count);
+		ft_putullnbr(va_arg(args, unsigned int), "0123456789abcdef", count);
 	if (format == 'X')
-		ft_putullnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF", count);
+		ft_putullnbr(va_arg(args, unsigned int), "0123456789ABCDEF", count);
 	if (format == '%')
 		ft_putchar('%', count);
 }
