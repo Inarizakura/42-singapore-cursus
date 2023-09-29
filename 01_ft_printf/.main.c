@@ -29,6 +29,10 @@ int	main(void)
 	printf("%d\n", printf("%%p results: %p.\n", ptr2));
 	ft_printf("%d\n", ft_printf("%%p results: %p.\n", ptr2));
 
+	void			*ptr3 = 0;
+	printf("%d\n", printf("%%p results: %p.\n", ptr3));
+	ft_printf("%d\n", ft_printf("%%p results: %p.\n", ptr3));
+	
 // %d
 	printf("%%d tests\n");
 	int				d = -2147483648;
