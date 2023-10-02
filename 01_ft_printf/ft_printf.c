@@ -6,24 +6,11 @@
 /*   By: dphang <dphang@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:04:18 by dphang            #+#    #+#             */
-/*   Updated: 2023/09/28 22:21:48 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/02 12:57:28 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void	ft_tounsigned(int nbr, char *base, int *count)
-{
-	long long int	nb;
-
-	nb = nbr;
-	if (nb < 0)
-	{
-		ft_putchar('-', count);
-		nb *= -1;
-	}
-	ft_putullnbr(nb, base, count);
-}
 
 static void	ft_checkformat(va_list args, char format, int *count)
 {
