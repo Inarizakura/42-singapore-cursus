@@ -6,16 +6,27 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:53 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/02 17:59:36 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/03 16:44:08 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <unistd.h>
-#include <stdlib.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+# include <unistd.h>
+# include <stdlib.h>
+
+typedef struct s_list
+{
+	char			*s_buffer;
+	struct s_list	*next;
+}	t_list;
 
 char	*get_next_line(int fd);
+void	*ft_calloc(size_t nmemb, size_t size);
 
-# endif
+#endif
