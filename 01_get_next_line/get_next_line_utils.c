@@ -6,13 +6,13 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/03 17:00:35 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/04 17:06:07 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_lstnew(size_t size)
+/*t_list	*ft_lstnew(size_t size)
 {
 	t_list	*node;
 
@@ -23,7 +23,7 @@ t_list	*ft_lstnew(size_t size)
 	node->s_buffer[BUFFER_SIZE] = '\0';
 	node->next = NULL;
 	return (node);
-}
+}*/
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -44,6 +44,70 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
+char	*ft_strjoin(char const *s1, char const *s2, size_t size)
+{
+	size_t	s1_len;
+	size_t	i;
+	size_t	j;
+	char	*res;
+
+	i = 0;
+	j = 0;
+	s1_len = 0;
+	while (s1[s1_len])
+		s1_len++;
+	res = calloc((s1_len + size), sizeof(char));
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		res[i + j] = s2[j];
+		j++;
+	}
+	return (res);
+}
+
+char	*ft_strdup(char const *s, size_t size)
+{
+	int		i;
+	char	*res;
+
+	res = ft_calloc((size + 1), sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		res[i] = s[i];
+		i++;
+	}
+	return (res);
+}
+
+char	*ft_substr(char const *s, size_t start, size_t len, size_t s_len)
+{
+	size_t	i;
+	char	*res;
+
+	if (start > s_len)
+		return (ft_strdup("", 1));
+	if ((start + len) > s_len)
+		res = ft_calloc((s_len - start + 1), sizeof(char));
+	else
+		res = ft_calloc((len + 1), sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s[start + i] && start < s_len && i < len)
+	{
+		res[i] = s[start + i];
+		i++;
+	}
+	return (res);
+}
 /*#include <stdio.h>
 #include <string.h>
 int	main(void)
