@@ -6,13 +6,13 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/04 17:07:32 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/05 18:24:39 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	checknl(char *storage)
+/*static int	checknl(char *storage)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ static int	checknl(char *storage)
 	return (0);
 }
 
-static char	*cleanstorage(char *storage, size_t size)
+static char	*clean_storage(char *storage, size_t size)
 {
 	char	*temp;
 	size_t	nl;
@@ -41,23 +41,34 @@ static char	*cleanstorage(char *storage, size_t size)
 
 static char	*readline(int fd, char *storage, char *temp, size_t size)
 {
+	char	*hold;
+	char	*temp;
+
+	hold = 0;
+	temp = 0;
 	storage = ft_calloc((size + 1), sizeof(char));
 	if (!storage)
 		return (NULL);
 	while (!checknl(storage))
 	{
-		temp = 
+		if (storage)
+		{
+			hold = ft_strjoin(temp, storage, size);
+			free(temp);
+			temp = ft_strdup(hold, size);
+			free(storage);
+		}
 		read(fd, storage, size);
-		storage[size] = '\0';
 	}
-	storage = cleanstorage(storage, size);
-	return (storage);
+	free(temp);
+	storage = clean_storage(storage, size);
+	return (hold);
 }
 
 char	*get_next_line(int fd)
 {
 	static char		*storage;
-	char			*temp;
+//	char			*temp;
 	char			*res;
 	
 	if (fd < 0 || BUFFER_SIZE < 0)
@@ -65,4 +76,53 @@ char	*get_next_line(int fd)
 
 	res = readline(fd, storage, temp, BUFFER_SIZE);
 	return(res);
+}*/
+
+static size_t	checknl(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+static char	*gnl_readline(int fd, char *storage, char *hold)
+{
+	char	*temp;
+
+	temp = 0;
+	if (!storage)
+		storage = gnl_calloc(BUFFER_SIZE, sizeof(char));
+	while (!checknl(storage))
+	{
+		read(fd, storage, BUFFER_SIZE);
+		if (hold)
+		{
+			temp = hold;
+			free(hold);
+			hold = gnl_strjoin(temp, storage);
+		}
+	}
+	return (hold);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*storage;
+	char		*hold;
+	char		*res;
+
+	hold = 0;
+	if (fd < 0 || BUFFER_SIZE < 0)
+		return (NULL);
+	res = gnl_readline(fd, storage, hold);
+	if (!res)
+		gnl_freeall();
+	return (res);
 }
