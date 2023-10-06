@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/05 18:24:39 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/06 18:34:11 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,22 +92,32 @@ static size_t	checknl(char *str)
 	return (0);
 }
 
+static char *holdstr(char *dest, char *src)
+{
+    char    *str;
+    if (!dest)
+        dest = gnl_strdup(src);
+    else
+        gnl_strjoin(
+
 static char	*gnl_readline(int fd, char *storage, char *hold)
 {
-	char	*temp;
+//	char	*temp;
 
-	temp = 0;
+//	temp = 0;
 	if (!storage)
 		storage = gnl_calloc(BUFFER_SIZE, sizeof(char));
 	while (!checknl(storage))
 	{
 		read(fd, storage, BUFFER_SIZE);
-		if (hold)
+        if (!checknl(storage)
+            holdstr(hold, storage);
+		/*if (hold)
 		{
 			temp = hold;
 			free(hold);
 			hold = gnl_strjoin(temp, storage);
-		}
+		}*/
 	}
 	return (hold);
 }
@@ -123,6 +133,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	res = gnl_readline(fd, storage, hold);
 	if (!res)
-		gnl_freeall();
+		return (NULL);;
 	return (res);
 }
