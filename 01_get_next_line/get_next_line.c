@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/06 18:34:11 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/09 18:01:27 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,15 +92,23 @@ static size_t	checknl(char *str)
 	return (0);
 }
 
-static char *holdstr(char *dest, char *src)
+static char *holdstr(char *hold, char *storage)
 {
-    char    *str;
-    if (!dest)
-        dest = gnl_strdup(src);
-    else
-        gnl_strjoin(
+    char    *temp;
 
-static char	*gnl_readline(int fd, char *storage, char *hold)
+    if (!hold)
+        hold = gnl_strdup(storage);
+    else
+    {
+        temp = gnl_strdup(hold);
+        free(hold);
+        hold = gnl_strjoin(temp, storage);
+        free(temp);
+    }
+    return (hold);
+}
+
+static char	*readline(int fd, char *storage, char *hold)
 {
 //	char	*temp;
 
@@ -110,16 +118,20 @@ static char	*gnl_readline(int fd, char *storage, char *hold)
 	while (!checknl(storage))
 	{
 		read(fd, storage, BUFFER_SIZE);
-        if (!checknl(storage)
-            holdstr(hold, storage);
-		/*if (hold)
-		{
-			temp = hold;
-			free(hold);
-			hold = gnl_strjoin(temp, storage);
-		}*/
+     //   if (!checknl(storage))
+        hold = holdstr(hold, storage);
 	}
 	return (hold);
+}
+
+static char procline(char *storage, char *hold)
+{
+    char    *str;
+    char    *temp;
+    //to-do:    replace storage from (\n + 1) to \0 and,
+    //          store str up til \n.
+    str = gnl_strdup(hold, start, stop)
+    return (str);
 }
 
 char	*get_next_line(int fd)
@@ -131,8 +143,9 @@ char	*get_next_line(int fd)
 	hold = 0;
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	res = gnl_readline(fd, storage, hold);
-	if (!res)
-		return (NULL);;
+	readline(fd, storage, hold);
+    res = procline(storage, hold);
+//	if (!res)
+//		return (NULL);;
 	return (res);
 }
