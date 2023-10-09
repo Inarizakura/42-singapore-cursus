@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/06 15:59:04 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/09 17:33:41 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	while (s1[len])
 		len++;
 	res = gnl_calloc((len + BUFFER_SIZE + 1), sizeof(char));
-	if (!res)
-		return (NULL);
 	i = 0;
 	while (s1[i])
 	{
@@ -100,4 +98,17 @@ char	*gnl_strdup(const char *str)
 		i++;
 	}
 	return (res);
+}*/
+
+/*#include <stdio.h>
+
+int main (void)
+{
+    char *s1 = "string 1 ";
+    char *s2 = "string 2";
+    char *res;
+
+    res = gnl_strjoin(s1, s2);
+    printf("%s", res);
+    return (0);
 }*/
