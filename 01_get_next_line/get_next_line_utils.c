@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/09 17:33:41 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/10 17:55:52 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*gnl_calloc(size_t nmemb, size_t size)
 		return (NULL);
 	i = 0;
 	t_ptr = (char *)ptr;
-	while (i < size)
+	while (i < (nmemb * size))
 	{
 		t_ptr[i] = '\0';
 		i++;
@@ -78,6 +78,22 @@ char	*gnl_strdup(const char *str)
 	return (res);
 }
 
+char    *gnl_substr(char const *str, size_t start, size_t end, size_t len)
+{
+    size_t  i;
+    char    *res;
+
+    if (start > len)
+        return (gnl_strdup(""));
+    res = gnl_calloc((end - start + 1), sizeof(char));
+    i = 0;
+    while (str[start + i] && (start + i) < end)
+    {
+        res[i] = str[start + i];
+        i++;
+    }
+    return (res);
+}
 /*char	*ft_substr(char const *s, size_t start, size_t len, size_t s_len)
 {
 	size_t	i;
