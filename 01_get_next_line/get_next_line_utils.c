@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/10 17:55:52 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/12 12:27:30 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*gnl_strdup(const char *str)
 	int		i;
 	char	*res;
 
-    len = 0;
+	len = 0;
 	while (str[len])
 		len++;
 	res = gnl_calloc((len + 1), sizeof(char));
@@ -78,21 +78,21 @@ char	*gnl_strdup(const char *str)
 	return (res);
 }
 
-char    *gnl_substr(char const *str, size_t start, size_t end, size_t len)
+char	*gnl_substr(char const *str, size_t start, size_t end, size_t len)
 {
-    size_t  i;
-    char    *res;
+	size_t	i;
+	char	*res;
 
-    if (start > len)
-        return (gnl_strdup(""));
-    res = gnl_calloc((end - start + 1), sizeof(char));
-    i = 0;
-    while (str[start + i] && (start + i) < end)
-    {
-        res[i] = str[start + i];
-        i++;
-    }
-    return (res);
+	if (start > len)
+		return (gnl_strdup(""));
+	res = gnl_calloc((end - start + 1), sizeof(char));
+	i = 0;
+	while (str[start + i] && (start + i) < end)
+	{
+		res[i] = str[start + i];
+		i++;
+	}
+	return (res);
 }
 /*char	*ft_substr(char const *s, size_t start, size_t len, size_t s_len)
 {

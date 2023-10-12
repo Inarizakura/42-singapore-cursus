@@ -10,12 +10,13 @@ int	main(void)
 	char *str;
 
 	fd = open("test.txt", O_RDONLY);
-/*   	while (str)
+	str = get_next_line(fd);
+  	while (str)
     {
-        str = get_next_line(fd);
        	printf("%s", str);
-    }*/
-    str = get_next_line(fd);
-    printf("%s", str);
+		str = get_next_line(fd);
+    }
+//	str = get_next_line(fd);
+//	printf("%s", str);
 	return (0);
 }
