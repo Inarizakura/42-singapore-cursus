@@ -42,6 +42,8 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	while (s1[len])
 		len++;
 	res = gnl_calloc((len + BUFFER_SIZE + 1), sizeof(char));
+	if (!res)
+		return (NULL);
 	i = 0;
 	while (s1[i])
 	{
@@ -54,6 +56,7 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 		res[i + j] = s2[j];
 		j++;
 	}
+	res[i + j] = '\0';
 	return (res);
 }
 
@@ -75,22 +78,30 @@ char	*gnl_strdup(const char *str)
 		res[i] = str[i];
 		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }
 
-char	*gnl_substr(char const *str, size_t start, size_t end, size_t len)
+char	*gnl_substr(char const *str, size_t start, size_t len)
 {
 	size_t	i;
+	size_t	s_len;
 	char	*res;
 
-	if (start > len)
+	s_len = 0;
+	while (str[s_len])
+		s_len++;
+	if (start > s_len)
 		return (gnl_strdup(""));
-	res = gnl_calloc((end - start + 1), sizeof(char));
+	res = gnl_calloc((len - start + 1), sizeof(char));
+	if (!res)
+		return (NULL);
 	i = 0;
-	while (str[start + i] && (start + i) < end)
+	while (str[start + i] && (start + i) < len)
 	{
 		res[i] = str[start + i];
 		i++;
 	}
+	res[i] = '\0';
 	return (res);
 }
