@@ -24,5 +24,5 @@ char	*get_next_line(int fd);
 void	*gnl_calloc(size_t nmemb, size_t size);	
 char	*gnl_strjoin(const char *s1, char const *s2);
 char	*gnl_strdup(char const *str);
-char	*gnl_substr(char const *str, size_t start, size_t end, size_t len);
+char	*gnl_substr(char const *str, size_t start, size_t len);
 #endif
