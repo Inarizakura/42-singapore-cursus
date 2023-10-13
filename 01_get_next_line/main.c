@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 11:33:18 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/13 15:31:18 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/13 19:42:30 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ int	main(void)
 	int		fd;
 	char	*str;
 
-	fd = open("42nonl", O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	str = get_next_line(fd);
-		printf("%s", str);
+//		printf("%s", str);
 //	str = get_next_line(fd);
 	
-/*	while (str)
+	while (str)
 	{
 		printf("%s", str);
 		str = get_next_line(fd);
-	}*/
+	}
 	return (0);
 }
