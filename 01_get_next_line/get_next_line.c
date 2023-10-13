@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/13 13:39:14 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/13 20:36:01 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	checknl(char *str)
 	return (0);
 }
 
-static void	readline(int fd, char **storage)
+static int	readline(int fd, char **storage)
 {
 	char	*temp;
 	char	*hold;
@@ -34,19 +34,19 @@ static void	readline(int fd, char **storage)
 
 	temp = gnl_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!temp)
-		return ;
+		return (0);
 	is_read = 1;
 	while (is_read > 0)
 	{
 		is_read = read(fd, temp, BUFFER_SIZE);
 		if (is_read == 0)
-			break;
+			break ;
 		if (is_read < 0)
 		{
-		
 			free(*storage);
+			*storage = NULL;
 			free(temp);
-			return ;
+			return (0);
 		}
 		temp[is_read] = '\0';
 		if (!*storage)
@@ -62,6 +62,7 @@ static void	readline(int fd, char **storage)
 			break ;
 	}
 	free(temp);
+	return (1);
 }
 
 static char	*procline(char **storage)
@@ -73,13 +74,13 @@ static char	*procline(char **storage)
 
 	nl = 0;
 	len = 0;
-	while (storage [0][nl] && storage[0][nl] != '\n')
+	while (storage[0][nl] && storage[0][nl] != '\n')
 		nl++;
 	while (storage[0][len])
 		len++;
 	hold = gnl_strdup(*storage);
 	free(*storage);
-	*storage = gnl_substr(hold, nl + 1, len + 1);
+	*storage = gnl_substr(hold, nl + 1, len);
 	res = gnl_substr(hold, 0, nl + 1);
 	free(hold);
 	return (res);
@@ -87,19 +88,22 @@ static char	*procline(char **storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage;
+	static char	*storage = NULL;
 	char		*res;
+	int			i;
 
 	res = NULL;
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	readline(fd, &storage);
+	i = readline(fd, &storage);
 	if (!storage)
 		return (NULL);
-	res = procline(&storage);
+	if (i)
+		res = procline(&storage);
 	if (!res || !*res)
 	{
 		free(storage);
+		storage = NULL;
 		free(res);
 		return (NULL);
 	}
