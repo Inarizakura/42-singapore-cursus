@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/10 17:55:52 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/13 11:32:07 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*gnl_strdup(const char *str)
 	int		i;
 	char	*res;
 
-    len = 0;
+	len = 0;
 	while (str[len])
 		len++;
 	res = gnl_calloc((len + 1), sizeof(char));
@@ -78,53 +78,19 @@ char	*gnl_strdup(const char *str)
 	return (res);
 }
 
-char    *gnl_substr(char const *str, size_t start, size_t end, size_t len)
-{
-    size_t  i;
-    char    *res;
-
-    if (start > len)
-        return (gnl_strdup(""));
-    res = gnl_calloc((end - start + 1), sizeof(char));
-    i = 0;
-    while (str[start + i] && (start + i) < end)
-    {
-        res[i] = str[start + i];
-        i++;
-    }
-    return (res);
-}
-/*char	*ft_substr(char const *s, size_t start, size_t len, size_t s_len)
+char	*gnl_substr(char const *str, size_t start, size_t end, size_t len)
 {
 	size_t	i;
 	char	*res;
 
-	if (start > s_len)
-		return (ft_strdup("", 1));
-	if ((start + len) > s_len)
-		res = ft_calloc((s_len - start + 1), sizeof(char));
-	else
-		res = ft_calloc((len + 1), sizeof(char));
-	if (!res)
-		return (NULL);
+	if (start > len)
+		return (gnl_strdup(""));
+	res = gnl_calloc((end - start + 1), sizeof(char));
 	i = 0;
-	while (s[start + i] && start < s_len && i < len)
+	while (str[start + i] && (start + i) < end)
 	{
-		res[i] = s[start + i];
+		res[i] = str[start + i];
 		i++;
 	}
 	return (res);
-}*/
-
-/*#include <stdio.h>
-
-int main (void)
-{
-    char *s1 = "string 1 ";
-    char *s2 = "string 2";
-    char *res;
-
-    res = gnl_strjoin(s1, s2);
-    printf("%s", res);
-    return (0);
-}*/
+}

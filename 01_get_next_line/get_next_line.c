@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/10 18:15:05 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/13 11:33:36 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,51 +26,47 @@ static size_t	checknl(char *str)
 	return (0);
 }
 
-static char	*holdstr(char *storage, char *hold)
+static void	readline(int fd, char **storage, char **hold)
 {
 	char	*temp;
+	size_t	is_read;
 
-	if (!hold)
-		hold = gnl_strdup(storage);
-	else
+	*storage = gnl_calloc((BUFFER_SIZE + 1), sizeof(char));
+	is_read = 1;
+	while (is_read > 0)
 	{
-		temp = gnl_strdup(hold);
-		free(hold);
-		hold = gnl_strjoin(temp, storage);
-		free(temp);
+		if (!checknl(*storage))
+			is_read = read(fd, *storage, BUFFER_SIZE);
+		if (!*hold)
+			*hold = gnl_strdup(*storage);
+		else
+		{
+			temp = gnl_strjoin(*hold, *storage);
+			free(*hold);
+			*hold = gnl_strdup(temp);
+			free(temp);
+			if (checknl(*storage))
+				return ;
+		}
 	}
-	return (hold);
 }
 
-static char	*readline(int fd, char *storage, char *hold)
-{
-	if (!storage)
-		storage = gnl_calloc(BUFFER_SIZE, sizeof(char));
-	while (!checknl(storage))
-	{
-		read(fd, storage, BUFFER_SIZE);
-		hold = holdstr(storage, hold);
-	}
-	return (hold);
-}
-
-static char	*procline(char *storage, char *hold)
+static char	*procline(char **storage, char **hold)
 {
 	char	*res;
-	char	*temp;
-    size_t	nl;
-    size_t	len;
+	size_t	nl;
+	size_t	len;
 
-	if (storage)
-		temp = holdstr(storage, hold);
-	free(hold);
-	free(storage);
-	while (temp[nl] && temp[nl] != '\n')
+	nl = 0;
+	len = 0;
+	while (hold[0][nl] && hold[0][nl] != '\n')
 		nl++;
-	while (temp[len])
+	while (hold[0][len])
 		len++;
-	storage = gnl_substr(temp, nl, len, len);
-	res = gnl_substr(temp, 0, nl, len);
+	free(*storage);
+	*storage = gnl_substr(*hold, nl - 1, len + 1, len);
+	res = gnl_substr(*hold, 0, nl + 1, len);
+	free(*hold);
 	return (res);
 }
 
@@ -80,12 +76,15 @@ char	*get_next_line(int fd)
 	char		*hold;
 	char		*res;
 
-	hold = 0;
+	storage = '\0';
+	hold = '\0';
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	readline(fd, storage, hold);
-	res = procline(storage, hold);
-//	if (!res)
-//		return (NULL);;
+	readline(fd, &storage, &hold);
+	if (!storage || !hold)
+		return (NULL);
+	res = procline(&storage, &hold);
+	if (!res)
+		return (NULL);
 	return (res);
 }
