@@ -23,15 +23,15 @@ int	main(void)
 	int		fd;
 	char	*str;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("42nonl", O_RDONLY);
 	str = get_next_line(fd);
-//		printf("%s", str);
+		printf("%s", str);
 //	str = get_next_line(fd);
 	
-	while (str)
+/*	while (str)
 	{
 		printf("%s", str);
 		str = get_next_line(fd);
-	}
+	}*/
 	return (0);
 }
