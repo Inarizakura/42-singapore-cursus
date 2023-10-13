@@ -39,8 +39,11 @@ static void	readline(int fd, char **storage)
 	while (is_read > 0)
 	{
 		is_read = read(fd, temp, BUFFER_SIZE);
+		if (is_read == 0)
+			break;
 		if (is_read < 0)
 		{
+		
 			free(*storage);
 			free(temp);
 			return ;
@@ -54,9 +57,9 @@ static void	readline(int fd, char **storage)
 			free(*storage);
 			*storage = gnl_strdup(hold);
 			free(hold);
-			if (checknl(*storage))
-				break ;
 		}
+		if (checknl(*storage))
+			break ;
 	}
 	free(temp);
 }
