@@ -6,11 +6,11 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:44 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/16 13:29:35 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/16 16:48:46 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*gnl_calloc(size_t nmemb, size_t size)
 {
