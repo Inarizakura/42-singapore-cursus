@@ -6,30 +6,36 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/13 20:36:01 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/16 14:03:40 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static size_t	checknl(char *str)
+static void	resetstorage(char **storage)
 {
-	size_t	i;
+	free(*storage);
+	*storage = NULL;
+}
 
-	i = 0;
-	while (str[i])
+static void	storeline(char **storage, char *temp)
+{
+	char	*hold;
+
+	if (!*storage)
+		*storage = gnl_strdup(temp);
+	else
 	{
-		if (str[i] == '\n')
-			return (1);
-		i++;
+		hold = gnl_strjoin(*storage, temp);
+		free(*storage);
+		*storage = gnl_strdup(hold);
+		free(hold);
 	}
-	return (0);
 }
 
 static int	readline(int fd, char **storage)
 {
 	char	*temp;
-	char	*hold;
 	int		is_read;
 
 	temp = gnl_calloc((BUFFER_SIZE + 1), sizeof(char));
@@ -41,23 +47,14 @@ static int	readline(int fd, char **storage)
 		is_read = read(fd, temp, BUFFER_SIZE);
 		if (is_read == 0)
 			break ;
-		if (is_read < 0)
+		else if (is_read < 1)
 		{
-			free(*storage);
-			*storage = NULL;
+			resetstorage(storage);
 			free(temp);
 			return (0);
 		}
 		temp[is_read] = '\0';
-		if (!*storage)
-			*storage = gnl_strdup(temp);
-		else
-		{
-			hold = gnl_strjoin(*storage, temp);
-			free(*storage);
-			*storage = gnl_strdup(hold);
-			free(hold);
-		}
+		storeline(storage, temp);
 		if (checknl(*storage))
 			break ;
 	}
@@ -90,20 +87,19 @@ char	*get_next_line(int fd)
 {
 	static char	*storage = NULL;
 	char		*res;
-	int			i;
+	int			valid_read;
 
 	res = NULL;
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	i = readline(fd, &storage);
+	valid_read = readline(fd, &storage);
 	if (!storage)
 		return (NULL);
-	if (i)
+	if (valid_read)
 		res = procline(&storage);
 	if (!res || !*res)
 	{
-		free(storage);
-		storage = NULL;
+		resetstorage(&storage);
 		free(res);
 		return (NULL);
 	}
