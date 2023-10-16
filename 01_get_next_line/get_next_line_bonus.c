@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 17:57:05 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/16 14:03:40 by dphang           ###   ########.fr       */
+/*   Updated: 2023/10/16 15:04:00 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static void	resetstorage(char **storage)
 {
@@ -85,21 +85,21 @@ static char	*procline(char **storage)
 
 char	*get_next_line(int fd)
 {
-	static char	*storage = NULL;
+	static char	*storage[FD_SIZE];
 	char		*res;
 	int			valid_read;
 
 	res = NULL;
-	if (fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0 || fd >= FD_SIZE || BUFFER_SIZE < 0)
 		return (NULL);
-	valid_read = readline(fd, &storage);
-	if (!storage)
+	valid_read = readline(fd, &storage[fd]);
+	if (!storage[fd])
 		return (NULL);
 	if (valid_read)
-		res = procline(&storage);
+		res = procline(&storage[fd]);
 	if (!res || !*res)
 	{
-		resetstorage(&storage);
+		resetstorage(&storage[fd]);
 		free(res);
 		return (NULL);
 	}
