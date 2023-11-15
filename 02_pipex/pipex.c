@@ -6,7 +6,7 @@
 /*   By: dphang <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 09:24:41 by dphang            #+#    #+#             */
-/*   Updated: 2023/10/30 10:14:04 by dphang           ###   ########.fr       */
+/*   Updated: 2023/11/15 13:10:48 by dphang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@
 
 void	pipex();
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **envp)
 {
+	int	fd[2];
+	
 	if (ac == 5)
 		pipex();
 	return (0);
